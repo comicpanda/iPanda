@@ -1,4 +1,7 @@
-panda-ipad
+panda-image-processing-server
 ==========
 
-for iPad
+Image Processing Server.
+
+npm install
+npm start
