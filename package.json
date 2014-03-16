@@ -1,0 +1,30 @@
+{
+  "name"        : "PandaPS",
+  "version"     : "0.0.1",
+  "private"     : true,
+  "author"      : "Tapastic <hello@tapastic.com>",
+  "description" : "Panda Image Processing Server",
+  "scripts"     : {
+    "start" : "node panda-imagesv.js",
+    "test"  : "grunt test"
+  },
+
+  "dependencies" : {
+    "gm"              : "1.9.0",
+    "async"           : "0.2.10",
+    "image-size"      : "0.2.1"
+  },
+
+  "devDependencies" : {
+    "grunt"                : "~0.4.1",
+    "grunt-contrib-jshint" : "~0.7.0",
+    "grunt-mocha-test"     : "~0.7.0",
+    "jshint"               : "~2.3.0",
+    "mocha"                : "~1.13.0",
+    "chai"                 : "~1.8.1"
+  },
+
+  "engines" : {
+    "node" : ">=0.10"
+  }
+}
