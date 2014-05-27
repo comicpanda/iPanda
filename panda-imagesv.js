@@ -23,7 +23,7 @@ var server = http.createServer(function (req, res) {
   if (action === '/ping') { // for ping request.
     res.writeHead(200, {'Content-Type' : 'text/plain' });
     res.end('pong \n');
-  } else if ('/avatar') {
+  } else if (action === '/avatar') {
     var imageUrl = request.query.url, 
     defaultImageUrl = "http://aws.tapastic.com/images/p/defaultuser-200.png",
     redirect = function (imageLocation) {
