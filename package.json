@@ -12,7 +12,8 @@
   "dependencies" : {
     "gm"              : "1.9.0",
     "async"           : "0.2.10",
-    "image-size"      : "0.2.1"
+    "image-size"      : "0.2.1",
+    "request"         : "2.36.0"
   },
 
   "devDependencies" : {
