@@ -2,6 +2,7 @@
 var http = require('http')
   , fs = require('fs')
   , url = require('url')
+  , request = require('request')
   , gm = require('gm')
   , async = require('async')
   , sizeOf = require('image-size')
@@ -18,25 +19,29 @@ process.on('uncaughtException', function (err) {
 });
 
 var server = http.createServer(function (req, res) {
-  var request = url.parse(req.url, true),
-    action = request.pathname;
+  var urls = url.parse(req.url, true),
+    action = urls.pathname;
   if (action === '/ping') { // for ping request.
     res.writeHead(200, {'Content-Type' : 'text/plain' });
     res.end('pong \n');
   } else if (action === '/avatar') {
-    var imageUrl = request.query.url, 
+    var imageUrl = urls.query.url, 
     defaultImageUrl = "http://aws.tapastic.com/images/p/defaultuser-200.png",
     redirect = function (imageLocation) {
       res.writeHead(302, {'location' : imageLocation});
       res.end();
     }; 
     if (imageUrl) {
-      http.get(imageUrl, function (response) {
-        var statusCode = Math.floor(response.statusCode / 100);
-        if (statusCode === 4) {
+      request.head(imageUrl, function(error, response) {
+        if(error) {
           redirect(defaultImageUrl);
         } else {
-          redirect(imageUrl);    
+          var statusCode = Math.floor(response.statusCode / 100);
+          if (statusCode === 4) {
+            redirect(defaultImageUrl);
+          } else {
+            redirect(imageUrl);    
+          }  
         }
       });
     } else {
