@@ -23,6 +23,25 @@ var server = http.createServer(function (req, res) {
   if (action === '/ping') { // for ping request.
     res.writeHead(200, {'Content-Type' : 'text/plain' });
     res.end('pong \n');
+  } else if ('/avatar') {
+    var imageUrl = request.query.url, 
+    defaultImageUrl = "http://aws.tapastic.com/images/p/defaultuser-200.png",
+    redirect = function (imageLocation) {
+      res.writeHead(302, {'location' : imageLocation});
+      res.end();
+    }; 
+    if (imageUrl) {
+      http.get(imageUrl, function (response) {
+        var statusCode = Math.floor(response.statusCode / 100);
+        if (statusCode === 4) {
+          redirect(defaultImageUrl);
+        } else {
+          redirect(imageUrl);    
+        }
+      });
+    } else {
+      redirect(defaultImageUrl);
+    }
   } else {
     // default size is 600 * 315
     var paths = action.split('/').slice(2)
