@@ -26,7 +26,7 @@ var server = http.createServer(function (req, res) {
     res.end('pong \n');
   } else if (action === '/avatar') {
     var imageUrl = urls.query.url, 
-    defaultImageUrl = "http://aws.tapastic.com/images/p/defaultuser-200.png",
+    defaultImageUrl = "http://aws.tapastic.com/images/p/defaultuser-200.jpg",
     redirect = function (imageLocation) {
       res.writeHead(302, {'location' : imageLocation});
       res.end();
